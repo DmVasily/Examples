@@ -1,0 +1,53 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+        android:background="#FFFFFF"
+    tools:context="${relativePackage}.${activityClass}" >
+
+            <ImageButton
+                android:id="@+id/destiny"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#FFFFFF"
+                android:layout_centerHorizontal="true" 
+                android:src="@drawable/destiny" />
+
+            <ImageButton
+                android:id="@+id/nine"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/six"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="24dp"
+                android:background="#FFFFFF"
+                android:src="@drawable/nine" />
+
+            <ImageButton
+                android:id="@+id/six"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:background="#FFFFFF"
+                android:src="@drawable/six" />
+
+            <ImageButton
+                android:id="@+id/three"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/six"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="20dp"
+                android:background="#FFFFFF"
+                android:src="@drawable/three" />
+
+            <ImageView
+                android:id="@+id/imageView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                android:src="@drawable/dmvasily" />
+        
+</RelativeLayout>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">X_O</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_x__o_startscreen">X_O</string>
+    <string name="title_activity_choisemode">Choisemode</string>
+
+</resources>

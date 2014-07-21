@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.dmvasily.x_o"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="9"
+        android:targetSdkVersion="21" />
+    
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/xoicon"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Base" >
+        </activity>
+        <activity
+            android:name=".X_O_startscreen"
+            android:label="@string/title_activity_x__o_startscreen"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Base" >
+                                    <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            
+        </activity>
+        <activity
+            android:name=".Choisemode"
+            android:label="@string/title_activity_choisemode" android:theme="@style/Theme.Base">
+            
+        </activity>
+    </application>
+
+</manifest>
