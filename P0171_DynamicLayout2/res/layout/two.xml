@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+ xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="fill_parent" 
+android:layout_height="fill_parent">
+
+
+<ImageView
+    android:id="@+id/imageView1"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+    android:layout_alignParentRight="true"
+    android:src="@drawable/snake" />
+
+<TextView
+    android:id="@+id/textView1"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentLeft="true"
+    android:layout_alignParentTop="true"
+    android:layout_marginTop="30dp"
+    android:text="Начальная скорость (мс):" />
+
+<EditText
+    android:id="@+id/editSpeed"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignBaseline="@+id/textView1"
+    android:layout_alignBottom="@+id/textView1"
+    android:layout_alignParentRight="true"
+    android:layout_toRightOf="@+id/textView1"
+    android:layout_weight="1"
+    android:inputType="numberDecimal"
+    android:ems="10" >
+
+    <requestFocus />
+</EditText>
+
+<TextView
+    android:id="@+id/Me"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+    android:layout_alignParentLeft="true"
+    android:fontFamily="sans-serif"
+    android:text="by DmVasily"
+    android:textSize="10sp" />
+
+<Button
+    android:id="@+id/ResetScore"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentLeft="true"
+    android:layout_below="@+id/editSpeed"
+    android:layout_marginTop="66dp"
+    android:text="Сброс рекорда" />
+
+<TextView
+    android:id="@+id/textView2"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentLeft="true"
+    android:layout_below="@+id/editSpeed"
+    android:layout_marginTop="24dp"
+    android:text="Ваше имя:" />
+
+<EditText
+    android:id="@+id/editName"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignBaseline="@+id/textView2"
+    android:layout_alignBottom="@+id/textView2"
+    android:layout_alignParentRight="true"
+    android:layout_toRightOf="@+id/textView2"
+    android:layout_weight="1"
+    android:ems="10" />
+
+<Button
+    android:id="@+id/Save"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentLeft="true"
+    android:layout_below="@+id/ResetScore"
+    android:text="Сохранить" />
+
+<Button
+    android:id="@+id/Scores"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentLeft="true"
+    android:layout_below="@+id/Save"
+    android:text="Лучшие результаты" />
+
+</RelativeLayout>

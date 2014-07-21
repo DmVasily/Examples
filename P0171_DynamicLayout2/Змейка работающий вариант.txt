@@ -1,0 +1,556 @@
+package com.example.p0171_dynamiclayout2;
+
+import java.util.Random;
+
+import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.graphics.Point;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.SystemClock;
+import android.view.Display;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.RelativeLayout;
+import android.widget.RelativeLayout.LayoutParams;
+import android.widget.TextView;
+
+public class MainActivity extends Activity implements OnClickListener {
+	RelativeLayout.LayoutParams lParamss[];
+	RelativeLayout llMain;
+  Button btnCreate;
+  Button btnClear;
+  Button btnUp;
+  Button btnDown;
+  Button btnLeft;
+  Button btnRight;
+  Button btnStart;
+  TextView Score;
+  int ide=0;
+  int wrapContent = RelativeLayout.LayoutParams.WRAP_CONTENT;
+  int width;
+  int height;
+  int xbelow=0;
+  int ybelow=0;
+  boolean food=true;
+  int tx,ty;
+  int fx,fy;
+  boolean getfood=false;
+  boolean stop=false;
+  final RelativeLayout.LayoutParams lParams0 = new RelativeLayout.LayoutParams( 5, 5);
+  int delayms=60;
+  String napravl="Up";
+  /** Called when the activity is first created. */
+  @SuppressLint("NewApi")
+@Override
+  public void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+	setContentView(R.layout.activity_main);
+	
+	//Buttons
+    llMain = (RelativeLayout) findViewById(R.id.llMain);
+    
+    btnCreate = (Button) findViewById(R.id.btnCreate);
+    btnCreate.setOnClickListener(this);
+    btnCreate.setVisibility(View.GONE);
+    btnClear = (Button) findViewById(R.id.btnClear);
+    btnClear.setOnClickListener(this);
+    btnClear.setVisibility(View.GONE);
+
+    btnUp = (Button) findViewById(R.id.Up);
+    btnUp.setOnClickListener(this);
+    btnUp.setVisibility(View.GONE);
+
+    btnDown = (Button) findViewById(R.id.Down);
+    btnDown.setOnClickListener(this);
+    btnDown.setVisibility(View.GONE);
+
+    btnLeft = (Button) findViewById(R.id.Left);
+    btnLeft.setOnClickListener(this);
+    btnLeft.setVisibility(View.GONE);
+
+    btnRight = (Button) findViewById(R.id.Right);
+    btnRight.setOnClickListener(this);
+    btnRight.setVisibility(View.GONE);
+
+    btnStart = (Button) findViewById(R.id.Start);
+    btnStart.setOnClickListener(this);
+    
+    Score = (TextView) findViewById(R.id.Score);
+    
+    Display display = getWindowManager().getDefaultDisplay();
+    Point size = new Point();
+    display.getSize(size);
+    width = size.x;
+    height =size.y; 
+    
+    //Borders
+	  RelativeLayout.LayoutParams lParamu = new RelativeLayout.LayoutParams( 5, 5);
+    Button upBorder = new Button(this);
+    upBorder.setId(1000);
+    upBorder.setBackgroundColor (0xff808080);
+    lParamu.topMargin=0;
+    lParamu.leftMargin=0;    
+    lParamu.width=width;
+    llMain.addView(upBorder, lParamu);
+    
+	  RelativeLayout.LayoutParams lParaml = new RelativeLayout.LayoutParams( 5, 5);
+    Button leftBorder = new Button(this);
+    leftBorder.setId(1001);
+    leftBorder.setBackgroundColor (0xff808080);
+    lParaml.topMargin=0;
+    lParaml.leftMargin=0;
+    lParaml.height=height;
+    llMain.addView(leftBorder, lParaml);
+    
+	  RelativeLayout.LayoutParams lParamr = new RelativeLayout.LayoutParams( 5, 5);
+	    Button rightBorder = new Button(this);
+	    rightBorder.setId(1002);
+	    rightBorder.setBackgroundColor (0xff808080);
+	    lParamr.topMargin=0;
+	    lParamr.leftMargin=width-5;
+	    lParamr.height=height;
+	    llMain.addView(rightBorder, lParamr);
+
+		  RelativeLayout.LayoutParams lParamb = new RelativeLayout.LayoutParams( 5, 5);
+		    Button bottomBorder = new Button(this);
+		    bottomBorder.setId(1003);
+		    bottomBorder.setBackgroundColor (0xff808080);
+		    lParamb.topMargin=height-80;
+		    lParamb.leftMargin=0;
+		    lParamb.width=width;
+		    llMain.addView(bottomBorder, lParamb);
+		    
+		    //Handler
+
+		    
+		    Handler handler=new Handler() {
+		    	};
+		    
+	    	//start create
+		    for(int i=0;i<3;i++) {
+		    onClick((btnCreate));
+		    }
+  }
+
+  
+  @Override
+  public void onClick(View v) {
+	  RelativeLayout.LayoutParams lParams = new RelativeLayout.LayoutParams( 5, 5);
+	 if (food==true) {
+	havchik ();
+	}
+    switch (v.getId()) {
+    case R.id.btnCreate:
+      Button btnNew = new Button(this);
+      btnNew.setId(ide);
+      btnNew.setBackgroundColor (0xFF00FF00 );
+      if(ide==0) {
+      lParams.topMargin=ty=ocrugl(height/2);
+      lParams.leftMargin=tx=ocrugl(width/2);
+      lParams0.topMargin=ocrugl(height/2);
+      lParams0.leftMargin=ocrugl(width/2);
+      xbelow=lParams.leftMargin;
+      ybelow=lParams.topMargin;
+      btnNew.setBackgroundColor (0xffff0000 );
+
+      }
+      else {
+      lParams.topMargin=ybelow+5;
+      lParams.leftMargin=xbelow;
+      }
+      llMain.addView(btnNew, lParams);
+      xbelow=lParams.leftMargin;
+      ybelow=lParams.topMargin;
+     // Toast.makeText(this, Integer.toString(xbelow) + Integer.toString(ybelow), Toast.LENGTH_SHORT).show();
+
+      ide++;
+
+      break;
+
+    case R.id.btnClear:
+      llMain.removeAllViews();
+    	//findViewById(3).setBackgroundColor (0xFF00FFFF );
+      ide=0;
+  		lParams0.topMargin=0;
+  		food=true;
+      break;
+
+    case R.id.Up:
+    	if (ide!=0) {
+    	movement ("Up");
+    	}
+    	break;
+    	
+    case R.id.Right:
+    	if (ide!=0) {
+    	movement ("Right");
+    	    	}
+    	break;
+    	    	
+    case R.id.Left:
+    	if (ide!=0) {
+    	movement ("Left"); 	
+    	}
+    	break; 
+    	
+    	case R.id.Down:
+        if (ide!=0) {
+        movement ("Down");
+        }
+        break;
+    case R.id.Start:
+    	Thread t = new Thread(new Runnable() {
+        public void run() {
+        int i=0;
+    	while(tx>0 && tx<width-5 && ty>0 &&ty<height-85) {
+    	//i++;
+    	//movement ("Up");
+    	ha.sendEmptyMessage(1);
+    	SystemClock.sleep(delayms);
+    	}
+        }
+    	});
+    	t.start();
+    	break;
+
+    }
+  }
+  
+
+
+  public void movement(String napr) {
+	  int location[] = new int[2];
+	  int xxbelow=0;
+	  int yybelow=0;
+	  int xlast = 0,ylast=0;
+	  RelativeLayout.LayoutParams lParamsi = new RelativeLayout.LayoutParams( 5, 5);
+	  RelativeLayout.LayoutParams lParamsn = new RelativeLayout.LayoutParams( 5, 5);
+
+		 findViewById(0).getLocationOnScreen(location);
+		 xxbelow=location[0];
+		 yybelow=location[1];
+		// Toast.makeText(this, Integer.toString(location[0])+Integer.toString(location[1]), Toast.LENGTH_SHORT).show();
+
+		 
+	  switch (napr) {
+	  case "Up":
+	     lParams0.topMargin-=5;
+	     ty-=5;
+	     break;
+	     
+	  case "Right":
+	     lParams0.leftMargin+=5;
+		  tx+=5;
+		  break;
+	  case "Left":
+	     lParams0.leftMargin-=5;
+	     tx-=5;
+	     break;
+
+	  case "Down":
+	     lParams0.topMargin+=5;
+	     ty+=5;
+	     break;
+	     
+		 }
+	     findViewById(0).setLayoutParams(lParams0);
+	  
+	   for (int i=1;i<ide;i++) {
+			  int location2[] = new int[2];
+			 findViewById(i).getLocationOnScreen(location2);
+			 lParamsi=(LayoutParams) findViewById(i).getLayoutParams();
+			 xlast=lParamsi.leftMargin;
+	    	 ylast=lParamsi.topMargin;
+
+		   	if (location2[0]<xxbelow) {
+			     lParamsi.leftMargin+=5;
+		     findViewById(i).setLayoutParams(lParamsi);
+		   	}
+		   	else if (location2[0]==xxbelow) {
+		   	}
+		   	else {
+			     lParamsi.leftMargin-=5;
+		     findViewById(i).setLayoutParams(lParamsi);
+		   	}
+		   	
+		   	if (location2[1]<yybelow) {
+			     lParamsi.topMargin+=5;
+		     findViewById(i).setLayoutParams(lParamsi);
+		   	}
+		   	else if (location2[1]==yybelow) {
+		   	}
+		   	else {
+			     lParamsi.topMargin-=5;
+		     findViewById(i).setLayoutParams(lParamsi);
+		   	}
+
+			 xxbelow=location2[0];
+			 yybelow=location2[1];
+			 
+			 
+			 // Toast.makeText(this, Integer.toString(i)+Integer.toString(ide), Toast.LENGTH_SHORT).show();
+	   }
+	   if (getfood==true) {
+		   getfood=false;
+	      Button btnNew = new Button(this);
+	      btnNew.setId(ide);
+	      btnNew.setBackgroundColor (0xFF00FF00);
+	      lParamsn.topMargin=ylast;
+	      lParamsn.leftMargin=xlast;
+	      llMain.addView(btnNew, lParamsn);
+	      ide++;
+	   }
+	      
+	   
+		 if(tx==fx && ty==fy) {
+		 getfood=true;
+	      llMain.removeView(findViewById(999));
+	      havchik();
+		 }
+
+
+	   
+  }
+  Handler ha =new Handler()  {
+	  public void handleMessage(android.os.Message msg) {
+		  int location[] = new int[2];
+		  int xxbelow=0;
+		  int yybelow=0;
+		  int xlast = 0,ylast=0;
+		  RelativeLayout.LayoutParams lParamsi = new RelativeLayout.LayoutParams( 5, 5);
+		  RelativeLayout.LayoutParams lParamsn = new RelativeLayout.LayoutParams( 5, 5);
+
+			 findViewById(0).getLocationOnScreen(location);
+			 xxbelow=location[0];
+			 yybelow=location[1];
+			// Toast.makeText(this, Integer.toString(location[0])+Integer.toString(location[1]), Toast.LENGTH_SHORT).show();
+
+			 
+		  switch (napravl) {
+		  case "Up":
+		     lParams0.topMargin-=5;
+		     ty-=5;
+		     break;
+		     
+		  case "Right":
+		     lParams0.leftMargin+=5;
+			  tx+=5;
+			  break;
+		  case "Left":
+		     lParams0.leftMargin-=5;
+		     tx-=5;
+		     break;
+
+		  case "Down":
+		     lParams0.topMargin+=5;
+		     ty+=5;
+		     break;
+		     
+			 }
+		     findViewById(0).setLayoutParams(lParams0);
+		  
+		   for (int i=1;i<ide;i++) {
+				  int location2[] = new int[2];
+				 findViewById(i).getLocationOnScreen(location2);
+				 lParamsi=(LayoutParams) findViewById(i).getLayoutParams();
+				 xlast=lParamsi.leftMargin;
+		    	 ylast=lParamsi.topMargin;
+
+			   	if (location2[0]<xxbelow) {
+				     lParamsi.leftMargin+=5;
+			     findViewById(i).setLayoutParams(lParamsi);
+			   	}
+			   	else if (location2[0]==xxbelow) {
+			   	}
+			   	else {
+				     lParamsi.leftMargin-=5;
+			     findViewById(i).setLayoutParams(lParamsi);
+			   	}
+			   	
+			   	if (location2[1]<yybelow) {
+				     lParamsi.topMargin+=5;
+			     findViewById(i).setLayoutParams(lParamsi);
+			   	}
+			   	else if (location2[1]==yybelow) {
+			   	}
+			   	else {
+				     lParamsi.topMargin-=5;
+			     findViewById(i).setLayoutParams(lParamsi);
+			   	}
+
+				 xxbelow=location2[0];
+				 yybelow=location2[1];
+				 
+				 
+				 // Toast.makeText(this, Integer.toString(i)+Integer.toString(ide), Toast.LENGTH_SHORT).show();
+		   }
+		   if (getfood==true) {
+			   getfood=false;
+		      Button btnNew = new Button(getApplicationContext());
+		      btnNew.setId(ide);
+		      btnNew.setBackgroundColor (0xFF00FF00);
+		      lParamsn.topMargin=ylast;
+		      lParamsn.leftMargin=xlast;
+		      llMain.addView(btnNew, lParamsn);
+              Score.setText(Integer.toString(ide-2));
+
+		      ide++;
+		   }
+		      
+		   
+			 if(tx==fx && ty==fy) {
+			 getfood=true;
+		      llMain.removeView(findViewById(999));
+		      havchik();
+			 }
+
+
+		   
+	  
+
+	  };
+	  };
+  
+  
+  
+  void havchik () {
+	  food=false;
+      Random randomno = new Random();
+	  RelativeLayout.LayoutParams lParams = new RelativeLayout.LayoutParams( 5, 5);
+
+	  int rx=fx=5+ocrugl(randomno.nextInt( width-10));
+	  int ry=fy=5+ocrugl(randomno.nextInt( height-90));
+      Button btnNew = new Button(this);
+      btnNew.setId(999);
+      btnNew.setBackgroundColor (0xff00ffff );
+      lParams.topMargin=ry;
+      lParams.leftMargin=rx;
+      llMain.addView(btnNew, lParams);
+	  //Toast.makeText(this, Integer.toString(fx) + Integer.toString(fy), Toast.LENGTH_SHORT).show();
+
+  }
+  
+  int ocrugl (int x) {
+	  int z=x/5;
+	  Math.floor(z);
+	  return z*5;
+  }
+  
+  public boolean onTouchEvent(MotionEvent event) {
+	    int x = (int)event.getX();
+	    int y = (int)event.getY();
+		  int location[] = new int[2];
+
+	    /*switch (event.getAction()) {
+	        case MotionEvent.ACTION_DOWN:
+	        case MotionEvent.ACTION_MOVE:
+	        case MotionEvent.ACTION_UP:
+	    } */
+		 //Toast.makeText(this, Integer.toString(x) + Integer.toString(y), Toast.LENGTH_SHORT).show();
+		 findViewById(0).getLocationOnScreen(location);
+
+		 int difx=x-location[0];
+		 int dify=y-location[1];
+		 
+		 if (x>location[0] && Math.abs(difx)>=Math.abs(dify) ) {
+		 //movement ("Right");
+		napravl="Right";
+		 } 
+		 if (x<location[0] && Math.abs(difx)>=Math.abs(dify) ) {
+		 //movement ("Left");
+		napravl="Left";
+		 } 
+		 if (y>location[1] && Math.abs(difx)<Math.abs(dify) ) {
+		 //movement ("Down");
+			 napravl="Down";
+		 }
+		 if (y<location[1] && Math.abs(difx)<Math.abs(dify) ) {
+		 //movement ("Up");
+			 napravl="Up";
+		 }
+
+		  
+	return false;
+	}
+
+}
+
+
+
+
+<?xml version="1.0" encoding="utf-8"?> 
+<LinearLayout 
+xmlns:android="http://schemas.android.com/apk/res/android" 
+android:orientation="vertical" 
+android:layout_width="fill_parent" 
+android:layout_height="fill_parent"
+android:background="#FFFFFF"> 
+<LinearLayout 
+android:id="@+id/linearLayout1" 
+android:layout_width="match_parent" 
+android:orientation="horizontal" 
+android:layout_height="50px"> 
+
+<Button 
+android:layout_width="wrap_content" 
+android:layout_height="wrap_content" 
+android:text="Create" 
+android:id="@+id/btnCreate"> 
+</Button> 
+<Button 
+android:layout_width="40px" 
+android:layout_height="wrap_content" 
+android:text="U" 
+android:id="@+id/Up"> 
+</Button> 
+<Button 
+android:layout_width="40px" 
+android:layout_height="wrap_content" 
+android:text="D" 
+android:id="@+id/Down"> 
+</Button> 
+<Button 
+android:layout_width="40px" 
+android:layout_height="wrap_content" 
+android:text="L" 
+android:id="@+id/Left"> 
+</Button> 
+<Button 
+android:layout_width="40px" 
+android:layout_height="wrap_content" 
+android:text="R" 
+android:id="@+id/Right"> 
+</Button> 
+
+<Button 
+android:layout_width="wrap_content" 
+android:layout_height="wrap_content" 
+android:text="Clear" 
+android:id="@+id/btnClear"> 
+</Button> 
+<Button 
+android:layout_width="wrap_content" 
+android:layout_height="wrap_content" 
+android:text="Поехали!" 
+android:id="@+id/Start"> 
+</Button> 
+<TextView
+ android:id="@+id/Score"
+ android:layout_width="wrap_content"
+ android:layout_height="wrap_content"
+ android:text="0">
+</TextView>
+
+</LinearLayout> 
+
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/llMain" 
+     >
+    </RelativeLayout>
+</LinearLayout>
+

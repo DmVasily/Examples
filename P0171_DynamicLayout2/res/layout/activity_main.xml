@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?> 
+<LinearLayout 
+xmlns:android="http://schemas.android.com/apk/res/android" 
+android:orientation="vertical" 
+android:layout_width="fill_parent" 
+android:layout_height="fill_parent"
+android:background="#FFFFFF"> 
+<LinearLayout 
+android:id="@+id/linearLayout1" 
+android:layout_width="match_parent" 
+android:orientation="horizontal" 
+android:layout_height="50px"> 
+
+<Button 
+android:layout_width="3px" 
+android:layout_height="wrap_content" 
+android:text="Create"
+android:id="@+id/btnCreate"> 
+</Button> 
+
+<ImageButton 
+android:layout_width="wrap_content" 
+android:layout_height="wrap_content" 
+android:text="Поехали!"
+android:id="@+id/Start"
+android:src="@drawable/start"> 
+</ImageButton> 
+
+<TextView
+    android:id="@+id/Score"
+    android:layout_width="30px"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layout_weight="1"
+    android:gravity="center"
+    android:text="0"
+    android:textSize="20px" >
+
+</TextView>
+<ImageButton 
+android:layout_width="wrap_content" 
+android:layout_height="wrap_content" 
+android:text="Заново" 
+android:id="@+id/Restart"
+android:src="@drawable/refresh"> 
+</ImageButton> 
+
+<ImageButton 
+android:layout_width="wrap_content" 
+android:layout_height="wrap_content" 
+android:text="Настр" 
+android:id="@+id/Options"
+android:src="@drawable/settings" > 
+</ImageButton>
+
+</LinearLayout> 
+
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/llMain" 
+     >
+    </RelativeLayout>
+</LinearLayout>
+
